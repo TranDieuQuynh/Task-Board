@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../store';
+import { SERVER } from '../constants';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ function Login() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/api/user/login', {
+      const response = await fetch(`${SERVER}/api/user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

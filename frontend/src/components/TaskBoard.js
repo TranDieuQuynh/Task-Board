@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useStore from '../store';
 import TaskCard from './TaskCard';
+import { SERVER } from '../constants';
 
 function TaskBoard() {
   const { boardId } = useParams();
@@ -17,7 +18,7 @@ function TaskBoard() {
   useEffect(() => {
     const fetchBoard = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/boards/${boardId}`);
+        const response = await fetch(`${SERVER}/api/boards/${boardId}`);
         const data = await response.json();
         setBoard(data.board);
         setTasks(data.tasks);
@@ -37,7 +38,7 @@ function TaskBoard() {
 
   const updateBoard = async () => {
     try {
-      await fetch(`http://localhost:5000/api/boards/${boardId}`, {
+      await fetch(`${SERVER}/api/boards/${boardId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: boardName, description: boardDesc }),
