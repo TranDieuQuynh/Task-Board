@@ -25,7 +25,7 @@ function Login() {
       if (response.ok) {
         setUser(data.user); 
         localStorage.setItem('user', JSON.stringify(data.user)); 
-        navigate(`/board/${data.boardId}`);
+        navigate('/boards');
       } else {
         alert(data.error);
       }

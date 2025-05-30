@@ -60,4 +60,16 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.get('/:userId/boards', async (req, res) => {
+  try {
+    const boards = await Board.findAll({
+      where: { UserId: req.params.userId },
+      order: [['createdAt', 'DESC']]
+    });
+    res.json({ boards });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;

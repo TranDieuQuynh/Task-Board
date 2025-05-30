@@ -52,7 +52,7 @@ function TaskBoard() {
   try {
     // Đặt icon mặc định dựa trên trạng thái
     const defaultIcon = '🚀'; 
-    const response = await fetch(`http://localhost:5000/api/tasks`, {
+    const response = await fetch(`${SERVER}/api/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ BoardId: boardId, name: 'New Task', status: 'In Progress', icon: defaultIcon }),
@@ -63,10 +63,11 @@ function TaskBoard() {
     console.error('Add task error:', error);
   }
 };
+// `${SERVER}/api/user/signup`
 
   const updateTask = async (taskId, updates) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+      const response = await fetch(`${SERVER}/api/tasks/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
@@ -80,7 +81,7 @@ function TaskBoard() {
 
   const deleteTask = async (taskId) => {
     try {
-      await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+      await fetch(`${SERVER}/api/tasks/${taskId}`, {
         method: 'DELETE',
       });
       setTasks(tasks.filter((task) => task.id !== taskId));
